@@ -1,0 +1,35 @@
+version: '2.4'
+
+services:
+  bootstrap-node:
+    build: .
+    ports:
+      - "8081:8080"
+      - "5001:5001"
+    entrypoint: |
+        bash -c "
+            export LIBP2P_FORCE_PNET=1
+            ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
+            ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
+            echo 'remenber to change configs for max storage and to avoid garbage collection'
+            echo 'add boostrap node string and run ipfs daemon &'
+            tail -f /dev/null
+        "
+    volumes:
+      - ./bootstrap_node/:/var/ipfs
+
+  client-node:
+      build: .
+      ports:
+        - "8082:8080"
+        - "5002:5001"
+      entrypoint: |
+        bash -c "
+            export LIBP2P_FORCE_PNET=1
+            ipfs config Addresses.Gateway /ip4/0.0.0.0/tcp/8080
+            ipfs config Addresses.API /ip4/0.0.0.0/tcp/5001
+            echo 'add boostrap node string and run ipfs daemon &'
+            tail -f /dev/null
+        "
+      volumes:
+        - ./client_node/:/var/ipfs

@@ -1,0 +1,16 @@
+{
+  "name": "ipfs-private",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/operations/SaveEncryptedFileToIpfs.js",
+  "type": "module",
+  "dependencies": {
+    "ipfs-http-client": "^56.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
